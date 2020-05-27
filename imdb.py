@@ -3,7 +3,7 @@ import numpy as np
 from keras.datasets import imdb
 from keras import models
 from keras import layers,optimizers
-import pandas.plotting._matplotlib as plt
+import matplotlib as plt
 #loading data from the dataset
 (train_data,train_labels), (test_data,test_labels) = imdb.load_data(num_words = 10000)
 #keeping only top 10000 repeated words in th etraining data and discarding the others
