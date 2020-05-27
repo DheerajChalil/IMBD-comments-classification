@@ -7,8 +7,8 @@ import pandas.plotting._matplotlib as plt
 #loading data from the dataset
 (train_data,train_labels), (test_data,test_labels) = imdb.load_data(num_words = 10000)
 #keeping only top 10000 repeated words in th etraining data and discarding the others
+#creating binary matrix of the given data
 def vector_sequences(sequences,dimension = 1000):
-    results = np.zeros((len(sequences),dimension)
     for i,sequence in enumerate(sequences):
         results[i,sequence] = 1
     return results
@@ -25,7 +25,15 @@ model.add(layers.Dense(16,activation='relu'))
 model.add(layers.Dense(1,activation='sigmoid'))
 #making an optimizer and compiling
 model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
-
+#testing model accuracy using validation
+#slicing data
+x_val = x_train[:10000]
+partial_x_train = x_train[10000:]
+#sliciing labels
+y_val = y_train[:10000]
+partial_y_train = y_train[10000:]
+#Not sure how many epochs to give...currently giving 10
+history = model.fit(partial_x_train,partial_y_train,epochs=10,batch_size=512,validation_data=(x_val,y_val))
 
 
 
